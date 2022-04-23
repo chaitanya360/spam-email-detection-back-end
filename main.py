@@ -5,7 +5,14 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 ## init Flask App
-app = Flask(__name__, template_folder='template')
+
+STATIC_FOLDER = 'template/assets'
+
+
+
+app = Flask(__name__, template_folder='template', static_folder=STATIC_FOLDER )
+
+
 tfvect = pickle.load(open('RFC_vector', 'rb'))
 
 # Load Pickle model
@@ -32,6 +39,7 @@ def predict():
     else:
         return render_template('index.html', prediction="Something went wrong")
 
-
 if __name__ == '__main__':
     app.run(debug=True)
+
+
