@@ -1,33 +1,33 @@
 from flask import Flask, render_template, request
-from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle
-import pandas as pd
-from sklearn.model_selection import train_test_split
 
-## init Flask App
+# init Flask App
 
 STATIC_FOLDER = 'template/assets'
 
 
+app = Flask(__name__, template_folder='template', static_folder=STATIC_FOLDER)
 
-app = Flask(__name__, template_folder='template', static_folder=STATIC_FOLDER )
 
-
-tfvect = pickle.load(open('RFC_vector', 'rb'))
+tfvect = pickle.load(open('DT_vector', 'rb'))
 
 # Load Pickle model
-loaded_model = pickle.load(open('RFC', 'rb'))
+loaded_model = pickle.load(open('DT', 'rb'))
+
 
 def fake_news_det(news):
     input_data = [news]
     vectorized_input_data = tfvect.transform(input_data)
     prediction = loaded_model.predict(vectorized_input_data)
     return prediction
-    
+
 # Defining the site route
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -39,7 +39,6 @@ def predict():
     else:
         return render_template('index.html', prediction="Something went wrong")
 
+
 if __name__ == '__main__':
     app.run(debug=True)
-
-

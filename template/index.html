@@ -53,167 +53,173 @@
 </body>
 </html> -->
 
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
- <meta charset="utf-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <title>Fake News Prediction</title>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
- <style>
-   body{
-    font-family: 'Roboto', sans-serif;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    height: 100vh;
-   }
-   .logo-wrapper{
-     background-color: #8A6E4D;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     padding: 0.5rem;
-    
-   }
-
-   .logo-wrapper  img{
-       width: 60%;
-     }
-
-     .header{
-font-style: normal;
-font-weight: 600;
-font-size: 35px;
-line-height: 48px;
-text-align: center;
-color: #000000;
-margin-top: 2rem;
-margin-bottom: 2rem;
-     }
-     #jTextarea{
-       max-height: 300px;
-       resize: none;
-       border-radius: 20px;
-       border: 1px solid #000000;
-       padding: 1rem;
-       max-width: 900px;
-       margin: auto;
-     }
-
-     .prediction{
-       display: flex;
-       justify-content: space-evenly;
-       align-items: center;
-       margin: 1rem 0;
-       margin-top: 0;
-       padding: 0 2rem;
-
-     }
-     .prediction .result{
-       font-weight: 800;
-       font-size: 1.4rem;
-     }
-     .prediction .result .true{
-       color: green;
-     }
-     .prediction .result .fake{
-       color: red;
-     }
-     .prediction .btn{
-       height: fit-content;
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Fake News Prediction</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        height: 100vh;
+      }
+      .logo-wrapper {
+        background-color: #a212af;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
       }
 
-      footer{
+      .logo-wrapper img {
+        width: 60%;
+      }
+
+      .header {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 35px;
+        line-height: 48px;
+        text-align: center;
+        color: #000000;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+      #jTextarea {
+        max-height: 300px;
+        resize: none;
+        border-radius: 20px;
+        border: 1px solid #000000;
+        padding: 1rem;
+        max-width: 900px;
+        margin: auto;
+      }
+
+      .prediction {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 1rem 0;
+        margin-top: 0;
+        padding: 0 2rem;
+      }
+      .prediction .result {
+        font-weight: 800;
+        font-size: 1.4rem;
+      }
+      .prediction .result .true {
+        color: green;
+      }
+      .prediction .result .fake {
+        color: red;
+      }
+      .prediction .btn {
+        height: fit-content;
+      }
+
+      footer {
         height: 100%;
-       background-color:  rgba(126, 79, 23, 0.1);
-       display: flex;
-       justify-content: space-between;
-       color: #7E4F17;
-       font-size: 1.4rem;
+        background-color: rgba(124, 23, 126, 0.1);
+        display: flex;
+        justify-content: space-between;
+        color: #7e4f17;
+        font-size: 1.4rem;
       }
 
-      footer .left{
+      footer .left {
         padding: 2rem;
       }
-   
-      footer .right{
+
+      footer .right {
         padding: 2rem;
         display: flex;
       }
 
-      footer .right .title{
-font-weight: 600;
+      footer .right .title {
+        font-weight: 600;
       }
 
-      footer .right .members{
+      footer .right .members {
         padding: 0 1rem;
         font-size: 1rem;
       }
+    </style>
+  </head>
+  <body>
+    <div class="logo-wrapper">
+      <img src="{{ url_for('static', filename='logo.png') }}" />
+    </div>
 
- </style>
-</head>
-<body>
-  <div class="logo-wrapper">
-    <img src="{{ url_for('static', filename='logo.png') }}"/>
-  </div>
-  
-  <div class='container'>
-   <h1 class="header">Fake News or Truth? Rumours Detection Using Machine Learning</h1>
-   <form action="/predict" method="POST">
-    
-   <div class="col-three-forth text-center col-md-offset-2">
-    <div class="form-group">
-     <textarea  class="form-control jTextarea mt-3" id="jTextarea" rows="5" name="message"
-      placeholder="Type or Paste News Article here..." required></textarea>
-<br><br>
-     
+    <div class="container">
+      <h1 class="header">Spam Email Detection Using ML</h1>
+      <form action="/predict" method="POST">
+        <div class="col-three-forth text-center col-md-offset-2">
+          <div class="form-group">
+            <textarea
+              class="form-control jTextarea mt-3"
+              id="jTextarea"
+              rows="5"
+              name="message"
+              placeholder="Type or Paste News Article here..."
+              required
+            ></textarea>
+            <br /><br />
+          </div>
+
+          <div class="prediction">
+            <div class="result">
+              {% if prediction %}
+              <div class="fake">Prediction : SPAM</div>
+              {% elif prediction ==0 %}
+              <div class="true">Prediction : NOT SPAM</div>
+              {% endif %}
+            </div>
+            <button
+              class="btn btn-primary btn-outline btn-md"
+              type="submit"
+              name="predict"
+            >
+              Predict
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-    
-    <div class="prediction">
-      <div class="result">
- {% if prediction %}
- <div class="true"> Prediction : TRUE NEWS</div>
- {% elif prediction ==0 %}
- <div class="fake">
-     Prediction : FAKE NEWS
- </div>
- {% endif %}
+    <footer>
+      <div class="left">
+        <div class="line">Group Id : 5</div>
+        <div class="line">Guided By : Dr. S.N. GUNJAL</div>
       </div>
- <button class="btn btn-primary btn-outline btn-md" type="submit" name="predict">Predict</button>
-    </div>
-  
-   
-   </div>
-  </form>
- </div>
- <footer>
-  <div class="left">
-    <div class="line">
-      Group Id          :  25
-    </div>
-    <div class="line">
-      Guided By :  Dr. T. Bhaskar
-    </div>
-  </div>
-  <div class="right">
-    <div class="title">
-     Project Team :
-    </div>
-    <div class="members">
-     <div class="member">Vishal Agale (03)</div>
-     <div class="member">Kalyani Deore (26)</div>
-     <div class="member">Rohit Dhamne (28)</div>
-     <div class="member">Leena Gaikwad (36)</div>
-    </div>
-  </div>
-</footer>
-</body>
+      <div class="right">
+        <div class="title">Project Team :</div>
+        <div class="members">
+          <div class="member">Rohit Kasar (67)</div>
+          <div class="member">Vaishnavi Kagde (63)</div>
+          <div class="member">Neha Bhapkar (28)</div>
+          <div class="member">Asma Fakir (36)</div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
