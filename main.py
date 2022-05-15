@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request
+import json
+from urllib import response
+from flask import Flask, render_template, request, jsonify
 import pickle
 
 # init Flask App
@@ -9,19 +11,12 @@ STATIC_FOLDER = 'template/assets'
 app = Flask(__name__, template_folder='template', static_folder=STATIC_FOLDER)
 
 
-tfvect = pickle.load(open('DT_vector', 'rb'))
+vect = pickle.load(open('vector', 'rb'))
 
-# Load Pickle model
-loaded_model = pickle.load(open('DT', 'rb'))
-
-
-def fake_news_det(news):
-    input_data = [news]
-    vectorized_input_data = tfvect.transform(input_data)
-    prediction = loaded_model.predict(vectorized_input_data)
-    return prediction
-
-# Defining the site route
+# Load Pickle models
+DT_loaded_model = pickle.load(open('DT', 'rb'))
+NB_loaded_model = pickle.load(open('NB', 'rb'))
+SVM_loaded_model = pickle.load(open('SVM', 'rb'))
 
 
 @app.route('/')
@@ -29,15 +24,23 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    if request.method == 'POST':
-        message = request.form['message']
-        pred = fake_news_det(message)
-        print(pred[0])
-        return render_template('index.html', prediction=pred[0])
-    else:
-        return render_template('index.html', prediction="Something went wrong")
+def parseData(data):
+    booleans = [False, True]
+    return booleans[(data[0])]
+
+
+@app.route('/predict/<string:message>', methods=['GET'])
+def predict(message):
+    vectorized_input_data = vect.transform([message])
+
+    dt_prediction = DT_loaded_model.predict(vectorized_input_data)
+    nb_prediction = NB_loaded_model.predict(vectorized_input_data)
+    svm_prediction = SVM_loaded_model.predict(vectorized_input_data)
+
+    response = jsonify({"dt_pred": parseData(dt_prediction), "nb_pred": parseData(
+        nb_prediction), "svm_pred": parseData(svm_prediction)})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 if __name__ == '__main__':
